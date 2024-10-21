@@ -1,9 +1,12 @@
 [tool.poetry]
 name = "llmconf"
-version = "0.1.1"
+version = "0.1.2"
 description = "LLMConf unifies the loading and generation configurations of various LLM backends (e.g. `openai`, `transformers`), simplifying parameter control for experiments and testing."
+license = "MIT"
 authors = ["Shichao Song <song.shichao@outlook.com>"]
 readme = "README.md"
+repository = "https://github.com/Ki-Seki/llmconf"
+keywords = ["LLMConf", "LLM", "configuration", "openai", "transformers"]
 packages = [{include = "llmconf", from = "src"}]
 
 [tool.poetry.dependencies]
