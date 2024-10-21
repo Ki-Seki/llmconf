@@ -32,7 +32,7 @@ jobs:
         poetry install --with test --no-interaction --no-root
     - name: Test with pytest
       run: |
-        poetry run pytest
+        PYTHONPATH=src poetry run pytest tests
     - name: Install ruff
       run: |
         poetry install ruff --no-interaction
