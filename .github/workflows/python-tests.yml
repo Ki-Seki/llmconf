@@ -35,7 +35,7 @@ jobs:
         PYTHONPATH=src poetry run pytest tests
     - name: Install ruff
       run: |
-        poetry install ruff --no-interaction
+        poetry add ruff
     - name: Test with ruff
       run: |
         poetry run ruff check
