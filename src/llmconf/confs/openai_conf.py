@@ -34,3 +34,37 @@ class OpenAIConf(BaseConf):
     top_logprobs: int | None = None
     top_p: float | None = None
     user: str | None = None
+
+    @property
+    def openai_init(self):
+        return self.dict_wo_none(
+            {
+                "api_key": self.api_key,
+                "organization": self.organization,
+                "project": self.project,
+                "base_url": self.base_url,
+                "timeout": self.timeout,
+                "max_retries": self.max_retries,
+            }
+        )
+
+    @property
+    def chat_completions(self):
+        return self.dict_wo_none(
+            {
+                "messages": self.messages,
+                "model": self.model,
+                "frequency_penalty": self.frequency_penalty,
+                "logit_bias": self.logit_bias,
+                "logprobs": self.logprobs,
+                "max_completion_tokens": self.max_completion_tokens,
+                "max_tokens": self.max_tokens,
+                "n": self.n,
+                "presence_penalty": self.presence_penalty,
+                "seed": self.seed,
+                "temperature": self.temperature,
+                "top_logprobs": self.top_logprobs,
+                "top_p": self.top_p,
+                "user": self.user,
+            }
+        )

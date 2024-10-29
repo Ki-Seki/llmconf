@@ -23,8 +23,26 @@ class LLMConf(OpenAIConf, TransformersConf):
         to_fields = {f.name: from_fields[f.name] for f in fields(to_class) if f.name in from_fields}
         return to_class(**to_fields)
 
+    @property
     def openai(self) -> OpenAIConf:
+        self.move(
+            ["pretrained_model_name_or_path"],
+            "model",
+        )
+        self.move(
+            ["max_new_tokens", "max_tokens"],
+            "max_completion_tokens",
+        )
         return self.to(OpenAIConf)
 
+    @property
     def transformers(self) -> TransformersConf:
+        self.move(
+            ["model"],
+            "pretrained_model_name_or_path",
+        )
+        self.move(
+            ["max_completion_tokens", "max_tokens"],
+            "max_new_tokens",
+        )
         return self.to(TransformersConf)
