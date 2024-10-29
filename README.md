@@ -1,6 +1,6 @@
 
 <p align="left">
-    <img src="./assets/logo.png" alt="LLMConf Logo" width="200"/>
+    <img src="https://raw.githubusercontent.com/Ki-Seki/llmconf/refs/heads/main/assets/logo.png" alt="LLMConf Logo" width="300"/>
 </p>
 
 ---
