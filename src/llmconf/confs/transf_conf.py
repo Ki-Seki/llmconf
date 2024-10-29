@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 
+from .base_conf import BaseConf
 
-@dataclass(kw_only=True)
-class TransformersConf:
+
+@dataclass(kw_only=True, repr=False)
+class TransformersConf(BaseConf):
     # Defined at: transformers.models.auto.auto_factory._BaseAutoModelClass.from_pretrained
     # Link: https://github.com/huggingface/transformers/blob/main/src/transformers/models/auto/auto_factory.py
 

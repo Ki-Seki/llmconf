@@ -2,9 +2,11 @@ import os
 
 from dataclasses import dataclass, field
 
+from .base_conf import BaseConf
 
-@dataclass(kw_only=True)
-class OpenAIConf:
+
+@dataclass(kw_only=True, repr=False)
+class OpenAIConf(BaseConf):
     # Defined at: openai._clinet.OpenAI.__init__
     # Link: https://github.com/openai/openai-python/blob/main/src/openai/_client.py
 
