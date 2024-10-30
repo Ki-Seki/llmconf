@@ -11,9 +11,9 @@ class OpenAIConf(BaseConf):
     # Link: https://github.com/openai/openai-python/blob/main/src/openai/_client.py
 
     api_key: str | None = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", None))
-    organization: str | None = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", None))
-    project: str | None = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", None))
-    base_url: str | None = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", None))
+    organization: str | None = field(default_factory=lambda: os.getenv("OPENAI_ORG_ID", None))
+    project: str | None = field(default_factory=lambda: os.getenv("OPENAI_PROJECT_ID", None))
+    base_url: str | None = field(default_factory=lambda: os.getenv("OPENAI_BASE_URL", None))
     timeout: float | None = None
     max_retries: int | None = None
 
