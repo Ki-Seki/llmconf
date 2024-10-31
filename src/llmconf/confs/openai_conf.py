@@ -36,7 +36,7 @@ class OpenAIConf(BaseConf):
     user: str | None = None
 
     @property
-    def openai_init(self):
+    def load_params(self):
         return self.dict_wo_none(
             {
                 "api_key": self.api_key,
@@ -49,7 +49,7 @@ class OpenAIConf(BaseConf):
         )
 
     @property
-    def chat_completions(self):
+    def gene_params(self):
         return self.dict_wo_none(
             {
                 "messages": self.messages,

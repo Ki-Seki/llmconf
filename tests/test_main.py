@@ -10,6 +10,13 @@ class TestBasics(unittest.TestCase):
     def test_init_with_query(self):
         self.assertEqual(str(LLMConf(query="Hi")), "LLMConf {'query': 'Hi'}")
 
+    def test_attribute_error(self):
+        conf = LLMConf()
+        with self.assertRaises(AttributeError):
+            conf.load_params  # noqa: B018
+        with self.assertRaises(AttributeError):
+            conf.gene_params  # noqa: B018
+
 
 class TestOpenAI(unittest.TestCase):
     def test_to_openai(self):
@@ -26,9 +33,9 @@ class TestOpenAI(unittest.TestCase):
         conf = LLMConf(
             api_key="key", base_url="url", model="model_a", max_new_tokens=100, query="Hi"
         )
-        self.assertEqual(str(conf.openai.openai_init), "{'api_key': 'key', 'base_url': 'url'}")
+        self.assertEqual(str(conf.openai.load_params), "{'api_key': 'key', 'base_url': 'url'}")
         self.assertEqual(
-            str(conf.openai.chat_completions), "{'model': 'model_a', 'max_completion_tokens': 100}"
+            str(conf.openai.gene_params), "{'model': 'model_a', 'max_completion_tokens': 100}"
         )
 
 
@@ -52,11 +59,11 @@ class TestTransformers(unittest.TestCase):
     def test_to_specific_cases(self):
         conf = LLMConf(model="model_a", max_tokens=100, query="Hi")
         self.assertEqual(
-            str(conf.transformers.from_pretrained),
+            str(conf.transformers.load_params),
             "{'pretrained_model_name_or_path': 'model_a'}",
         )
         self.assertEqual(
-            str(conf.transformers.generation_config),
+            str(conf.transformers.gene_params),
             "{'max_new_tokens': 100}",
         )
 

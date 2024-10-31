@@ -15,7 +15,7 @@ class LLMConf(OpenAIConf, TransformersConf):
     system_message: str | None = None
     query: str | None = None
 
-    def to(self, to_class: object):
+    def _to(self, to_class: object):
         if not is_dataclass(to_class):
             raise ValueError(f"{to_class.__name__} is not a dataclass.")
 
@@ -33,7 +33,7 @@ class LLMConf(OpenAIConf, TransformersConf):
             ["max_new_tokens", "max_tokens"],
             "max_completion_tokens",
         )
-        return self.to(OpenAIConf)
+        return self._to(OpenAIConf)
 
     @property
     def transformers(self) -> TransformersConf:
@@ -45,4 +45,12 @@ class LLMConf(OpenAIConf, TransformersConf):
             ["max_completion_tokens", "max_tokens"],
             "max_new_tokens",
         )
-        return self.to(TransformersConf)
+        return self._to(TransformersConf)
+
+    @property
+    def load_params(self):
+        raise AttributeError("load_params is not available for LLMConf.")
+
+    @property
+    def gene_params(self):
+        raise AttributeError("gene_params is not available for LLMConf.")

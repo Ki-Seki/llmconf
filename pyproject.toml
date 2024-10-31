@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "llmconf"
-version = "0.3.3"
+version = "0.4.0"
 description = "LLMConf unifies the loading and generation configurations of various LLM backends (e.g. `openai`, `transformers`, `vllm`), simplifying parameter control for experiments and testing."
 license = "MIT"
 authors = ["Shichao Song <song.shichao@outlook.com>"]

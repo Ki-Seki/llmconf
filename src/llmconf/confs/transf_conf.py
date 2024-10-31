@@ -91,13 +91,13 @@ class TransformersConf(BaseConf):
     max_matching_ngram_size: int | None = None
 
     @property
-    def from_pretrained(self) -> dict:
+    def load_params(self) -> dict:
         return self.dict_wo_none(
             {"pretrained_model_name_or_path": self.pretrained_model_name_or_path}
         )
 
     @property
-    def generation_config(self) -> dict:
+    def gene_params(self) -> dict:
         return self.dict_wo_none(
             {
                 "max_length": self.max_length,
