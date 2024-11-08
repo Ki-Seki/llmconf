@@ -1,8 +1,9 @@
 from dataclasses import dataclass, fields, is_dataclass
+from typing import Literal
 
 from .confs.openai_conf import OpenAIConf
 from .confs.transf_conf import TransformersConf
-from typing import Literal
+
 
 @dataclass(kw_only=True, repr=False)
 class LLMConf(OpenAIConf, TransformersConf):

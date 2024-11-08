@@ -17,10 +17,14 @@ print(response)
 print(llm.conf)
 ```
 """
-from openai import OpenAI
-from . import LLMConf
-from transformers import AutoModelForCausalLM, AutoTokenizer
+
 import torch
+
+from openai import OpenAI
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+from . import LLMConf
+
 
 class SimpleLLM:
     def __init__(self, conf: LLMConf):
@@ -30,14 +34,20 @@ class SimpleLLM:
         elif conf.backend == "transformers":
             self.conf = conf.transformers
             device = "cuda" if torch.cuda.is_available() else "cpu"
-            self.tokenizer = AutoTokenizer.from_pretrained(**{**self.conf.load_params, "trust_remote_code": True})
-            self.model = AutoModelForCausalLM.from_pretrained(**{**self.conf.load_params, "trust_remote_code": True}).to(device)
-    
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                **{**self.conf.load_params, "trust_remote_code": True}
+            )
+            self.model = AutoModelForCausalLM.from_pretrained(
+                **{**self.conf.load_params, "trust_remote_code": True}
+            ).to(device)
+
     def generate(self, prompt: str):
         if self.conf.backend == "openai":
             chat_completion = self.client.chat.completions.create(
-                **{**self.conf.gene_params,
-                "messages":[*self.conf.messages, {"role": "user", "content": prompt}]},
+                **{
+                    **self.conf.gene_params,
+                    "messages": [*self.conf.messages, {"role": "user", "content": prompt}],
+                },
             )
             response = chat_completion.choices[0].message.content
             return response
