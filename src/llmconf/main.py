@@ -32,7 +32,7 @@ class LLMConf(OpenAIConf, TransformersConf):
         return to_class(**to_fields)
 
     @property
-    def openai(self) -> OpenAIConf:
+    def openai(self) -> OpenAIConf:  # TODO: deepcopy
         self.move(
             ["pretrained_model_name_or_path"],
             "model",
@@ -50,7 +50,7 @@ class LLMConf(OpenAIConf, TransformersConf):
         return self._to(OpenAIConf)
 
     @property
-    def transformers(self) -> TransformersConf:
+    def transformers(self) -> TransformersConf:  # TODO: deepcopy
         self.move(
             ["model"],
             "pretrained_model_name_or_path",
