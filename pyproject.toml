@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "llmconf"
-version = "0.4.0"
+version = "0.5.0"
 description = "LLMConf unifies the loading and generation configurations of various LLM backends (e.g. `openai`, `transformers`, `vllm`), simplifying parameter control for experiments and testing."
 license = "MIT"
 authors = ["Shichao Song <song.shichao@outlook.com>"]
@@ -11,6 +11,9 @@ packages = [{include = "llmconf", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+torch = "^2.5.1"
+transformers = "^4.46.2"
+openai = "^1.54.3"
 
 [tool.poetry.group.dev]
 optional = true

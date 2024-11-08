@@ -4,6 +4,8 @@ from typing import Any
 
 @dataclass(kw_only=True)
 class BaseConf:
+    backend: str | None = None
+
     def __repr__(self):
         type_name = type(self).__name__
         fields = self.dict_wo_none(self.__dict__)

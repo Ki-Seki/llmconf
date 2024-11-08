@@ -2,7 +2,7 @@ from dataclasses import dataclass, fields, is_dataclass
 
 from .confs.openai_conf import OpenAIConf
 from .confs.transf_conf import TransformersConf
-
+from typing import Literal
 
 @dataclass(kw_only=True, repr=False)
 class LLMConf(OpenAIConf, TransformersConf):
@@ -14,6 +14,13 @@ class LLMConf(OpenAIConf, TransformersConf):
     # Shared
     system_message: str | None = None
     query: str | None = None
+    backend: Literal["openai", "transformers"] | None = None
+
+    def __post_init__(self):
+        if self.backend is None:
+            raise ValueError("backend is required.")
+        if self.backend not in ["openai", "transformers"]:
+            raise ValueError(f"Invalid backend: {self.backend}")
 
     def _to(self, to_class: object):
         if not is_dataclass(to_class):
@@ -33,6 +40,12 @@ class LLMConf(OpenAIConf, TransformersConf):
             ["max_new_tokens", "max_tokens"],
             "max_completion_tokens",
         )
+        if self.system_message is not None:
+            self.messages = {"role": "system", "content": self.system_message}
+        if self.query is not None:
+            if self.messages is None:
+                self.messages = []
+            self.messages.append({"role": "user", "content": self.query})
         return self._to(OpenAIConf)
 
     @property
